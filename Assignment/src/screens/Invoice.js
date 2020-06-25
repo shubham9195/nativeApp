@@ -4,20 +4,28 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
   StatusBar,
+  FlatList,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {CardData} from '../const/data/cardData';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import CommonHeader from '../components/CommonHeader';
 import InvoiceCard from '../components/InvoiceCard';
-
+const renderItem = ({item, index}) => {
+  return (
+    <InvoiceCard
+      key={index}
+      headerTitle={item.headerTitle}
+      hsnNumber={item.hsnNumber}
+      price={item.price}
+      taxRate={item.taxRate}
+      units={item.units}
+      stock={item.stock}
+      sku={item.sku}
+    />
+  );
+};
 const Invoice = () => {
   return (
     <>
@@ -27,8 +35,12 @@ const Invoice = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <View style={styles.body}>
-            <CommonHeader screenName="Invoice"/>
-            <InvoiceCard/>
+            <CommonHeader screenName="Invoice" />
+            <FlatList
+              data={CardData}
+              renderItem={renderItem}
+              keyExtractor={item => item.id}
+            />
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -40,38 +52,8 @@ const styles = StyleSheet.create({
   scrollView: {
     backgroundColor: Colors.lighter,
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
     backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
   },
 });
 

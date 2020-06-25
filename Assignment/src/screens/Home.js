@@ -4,28 +4,49 @@ import {
   StyleSheet,
   ScrollView,
   View,
-  Text,
   StatusBar,
 } from 'react-native';
 
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import Header from '../components/Header';
+import HeaderCard from '../components/HeaderCard';
+import CardComponent from '../components/CardComponent';
 const Home = () => {
   return (
     <>
-      <StatusBar barStyle="default" />
+      <StatusBar barStyle="default" backgroundColor="#006aff" />
       <SafeAreaView>
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
           <View style={styles.body}>
-            <Header/>
+            <Header />
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={{flexDirection: 'row', margin: 10}}>
+              <HeaderCard
+                fontName={'rupee'}
+                titleText="Total Due"
+                value="INR 35,800.00"
+              />
+              <HeaderCard
+                fontName={'clock-o'}
+                titleText="Upcoming Due"
+                value="INR 35,800.00"
+              />
+              <HeaderCard
+                fontName={'money'}
+                titleText="Total Paid"
+                value="INR 35,800.00"
+              />
+            </ScrollView>
           </View>
+          <CardComponent
+            title="Last Transaction"
+            firstButton="View"
+            secondButton="More"
+          />
         </ScrollView>
       </SafeAreaView>
     </>
@@ -33,41 +54,8 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
   body: {
     backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
   },
 });
 
